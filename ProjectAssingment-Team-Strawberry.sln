@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectAssingment-Team-Strawberry", "ProjectAssingment-Team-Strawberry\ProjectAssingment-Team-Strawberry.csproj", "{CF2610C5-55E4-44D5-9E49-25760ACE1C28}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF2610C5-55E4-44D5-9E49-25760ACE1C28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF2610C5-55E4-44D5-9E49-25760ACE1C28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF2610C5-55E4-44D5-9E49-25760ACE1C28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF2610C5-55E4-44D5-9E49-25760ACE1C28}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D4E93F03-622F-4A3B-9A74-A7534A671452}
+	EndGlobalSection
+EndGlobal
