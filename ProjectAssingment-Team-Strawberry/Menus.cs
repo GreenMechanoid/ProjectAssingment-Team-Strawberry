@@ -11,9 +11,9 @@ namespace ProjectAssingment_Team_Strawberry
 		int menuChoise = 0;
 		bool loopIsRunning = true;
 		bool isAnInt = false;
-		public void startMenu()
+		public void startMenu(List<Userhandling> Users, Userhandling currentUser)
 		{
-			this.menuChoise = 0;
+            this.menuChoise = 0;
 			this.loopIsRunning = true;
 			// creating a userInterface with a Switch case
 			do
@@ -40,7 +40,7 @@ namespace ProjectAssingment_Team_Strawberry
 						} while (!this.isAnInt); //keep looping if it's not a number
 						break;
 					case 1:
-						UserManagement();
+						UserManagement(Users, currentUser);
 						break;
 					case 99: //Termination Selection
 						this.loopIsRunning = false; // to terminate the do while after choice is to terminate the program
@@ -52,7 +52,7 @@ namespace ProjectAssingment_Team_Strawberry
 
 			} while (this.loopIsRunning);
 		}
-		public void UserManagement()
+		public void UserManagement(List<Userhandling> Users, Userhandling user)
 		{
 			this.menuChoise = 0;
 			this.loopIsRunning = true;
@@ -63,8 +63,7 @@ namespace ProjectAssingment_Team_Strawberry
 				default:
 					Console.Clear();
 					Console.WriteLine("1: Create User");
-					Console.WriteLine("2: Login User");
-					Console.WriteLine("3: Return to Previous Menu");
+					Console.WriteLine("2: Return to Previous Menu");
 
 					int.TryParse(Console.ReadLine(), out this.menuChoise);
 					//simple if to check that the number is corrisponding to a 'Menu Item'
@@ -81,19 +80,14 @@ namespace ProjectAssingment_Team_Strawberry
 					// Creation of user , ouput from system handled inside respective class that handles the stuff
 					this.menuChoise = 0;
 					Console.WriteLine("Welcome to User Creation Service");
-					startMenu();
+					user.CreateUser(Users, user);
+					startMenu(Users,user);
 					 break;
 				case 2:
-					// Login of users
-					this.menuChoise = 0;
-					Console.WriteLine("Welcome to User Login service");
-					startMenu();
-					 break;
-				case 3:
 					Console.Clear();
 					Console.WriteLine("Returning to previous menu..");
 					Thread.Sleep(1200);
-					startMenu();
+					startMenu(Users, user);
 					this.loopIsRunning = false;
 					 break;
 			}
