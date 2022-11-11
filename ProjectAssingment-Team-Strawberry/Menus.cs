@@ -10,7 +10,7 @@ namespace ProjectAssingment_Team_Strawberry
 	{
 		int menuChoise = 0;
 		bool loopIsRunning = true;
-		bool isAnInt = false;
+		bool isAChoice = false;
 		public void StartMenu(List<Userhandling> Users, Userhandling currentUser)
 		{
             this.menuChoise = 0;
@@ -31,13 +31,13 @@ namespace ProjectAssingment_Team_Strawberry
 							//simple if to check that the number is corrisponding to a 'Menu Item'
 							if (this.menuChoise == 1 || this.menuChoise == 99)  // ** expand with the numbers of the menu items
 							{
-								this.isAnInt = true;
+								this.isAChoice = true;
 							}
 							else
 							{
 								Console.WriteLine("Wrong input! , Can't find a matching menu item!");
 							}
-						} while (!this.isAnInt); //keep looping if it's not a number
+						} while (!this.isAChoice); //keep looping if it's not a number
 						break;
 					case 1:
 						UserManagement(Users, currentUser);
@@ -69,7 +69,7 @@ namespace ProjectAssingment_Team_Strawberry
 					//simple if to check that the number is corrisponding to a 'Menu Item'
 					if (this.menuChoise == 1 || this.menuChoise == 2 || this.menuChoise == 3)  // ** expand with the numbers of the menu items
 					{
-						this.isAnInt = true;
+						this.isAChoice = true;
 					}
 					else
 					{
