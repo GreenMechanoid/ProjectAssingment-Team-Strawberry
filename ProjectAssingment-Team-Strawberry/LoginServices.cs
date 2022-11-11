@@ -8,7 +8,7 @@ namespace ProjectAssingment_Team_Strawberry
     internal class LoginServices : Userhandling
     {
         //empty constructor, login creds and such is in user, this is a middle hand class that has the code for login and attempts
-        bool loginsuccess = false;
+        public bool loginSuccess = false;
 
         public bool LoginUser(List<Userhandling> users,string username, string password)
         {
@@ -20,7 +20,7 @@ namespace ProjectAssingment_Team_Strawberry
                     if (user.Password == password)
                     {
                         Console.WriteLine($"Login successfull, Welcome {user.FirstName} {user.LastName}");
-                        loginsuccess = true;
+                        this.loginSuccess = true;
                     }
                     else
                     {
@@ -34,11 +34,11 @@ namespace ProjectAssingment_Team_Strawberry
                         }
                     }
                 
-                } while (loginsuccess == false && user.lockedLogin == false);
+                } while (this.loginSuccess == false && user.lockedLogin == false);
             }
                 
 
-            return loginsuccess;
+            return this.loginSuccess;
         }
     }
 }
