@@ -224,7 +224,7 @@ namespace ProjectAssingment_Team_Strawberry
             return false;
         }
 
-        public virtual void CorrectInput(List<string> savedinfo, string tempString,string placeholder)
+        public void CorrectInput(List<string> savedinfo, string tempString,string placeholder)
         {
             ConsoleKey yesorno;
             
@@ -259,7 +259,7 @@ namespace ProjectAssingment_Team_Strawberry
             } while (loopTrigger == true);
         }
         //checks if the inputed info is correct, if not then keeps looping until it is , integer overload if needed later
-        public virtual void CorrectInput(List<int> savedinfo, int tempInt, string placeholder) 
+        public void CorrectInput(List<int> savedinfo, int tempInt, string placeholder) 
         {
             ConsoleKey yesorno;
             int tempArrayIndex;
