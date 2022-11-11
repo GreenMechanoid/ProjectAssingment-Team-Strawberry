@@ -23,6 +23,7 @@ namespace ProjectAssingment_Team_Strawberry
 					default: // default is user's choices, writeline messages with the choices available.
 
 						Console.Clear();
+						//login to system
 						Console.WriteLine("1: User management");
 						Console.WriteLine("99: Terminate Program");
 						do

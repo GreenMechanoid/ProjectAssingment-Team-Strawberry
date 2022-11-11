@@ -8,10 +8,10 @@ namespace ProjectAssingment_Team_Strawberry
     internal class LoginServices : Userhandling
     {
         //empty constructor, login creds and such is in user, this is a middle hand class that has the code for login and attempts
+        bool loginsuccess = false;
 
         public bool LoginUser(List<Userhandling> users,string username, string password)
         {
-            bool loginsuccess = false;
             foreach (Userhandling user in users.FindAll(un => un.userName == username))
             {
                 do
