@@ -11,7 +11,7 @@ namespace ProjectAssingment_Team_Strawberry
 		int menuChoise = 0;
 		bool loopIsRunning = true;
 		bool isAnInt = false;
-		public void startMenu(List<Userhandling> Users, Userhandling currentUser)
+		public void StartMenu(List<Userhandling> Users, Userhandling currentUser)
 		{
             this.menuChoise = 0;
 			this.loopIsRunning = true;
@@ -81,13 +81,13 @@ namespace ProjectAssingment_Team_Strawberry
 					this.menuChoise = 0;
 					Console.WriteLine("Welcome to User Creation Service");
 					user.CreateUser(Users, user);
-					startMenu(Users,user);
+					StartMenu(Users,user);
 					 break;
 				case 2:
 					Console.Clear();
 					Console.WriteLine("Returning to previous menu..");
 					Thread.Sleep(1200);
-					startMenu(Users, user);
+					StartMenu(Users, user);
 					this.loopIsRunning = false;
 					 break;
 			}

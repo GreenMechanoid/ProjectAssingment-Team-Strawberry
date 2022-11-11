@@ -11,7 +11,7 @@ namespace ProjectAssingment_Team_Strawberry
             Menus menu = new Menus();
             Userhandling admin = new Userhandling(); // added for testing, it has admin currently. no login implemented
             List<Userhandling> Users = new List<Userhandling>();
-            menu.startMenu(Users, admin);
+            menu.StartMenu(Users, admin);
         }
     }
 }

@@ -10,16 +10,26 @@ namespace ProjectAssingment_Team_Strawberry
     internal class Userhandling : Menus
     {
         // keeping default as an admin account, this should be removed once the system is published
-        protected string userName = "admin";
-        protected string password = "admin"; // will not be hashing the password due to this being a assignment and all partys needs to be able to access it.
-        protected string firstName = "admin";
-        protected string lastName = "adminsson";
+        public string userName = "admin";
+        private readonly string password = "admin"; // will not be hashing the password due to this being a assignment and all partys needs to be able to access it.
+        private readonly string firstName = "admin";
+        private readonly string lastName = "adminsson";
         protected string birthDate = "2000-01-12";
         protected string country = "adminland";
         protected string street = "admin street";
         protected string postalCode = "991122"; // is a string due to some postalcodes contain letters. (exampel Canada's contain letters)
         protected string cityName = "admin Town";
-        protected string userPrivelages = "ADMIN";
+        private readonly string userPrivelages = "ADMIN";
+
+        // keeping the login stuff in the user due to the structure it would have in a database (same table)
+        public int loginAttempts = 0; // always start at 0 attempts from created accounts
+        public bool lockedLogin = false; // can't be locked if the attempts havn't been made
+
+        public string Password { get => password;}
+        public string FirstName { get => firstName;}
+        public string LastName { get => lastName;}
+        public string UserPrivelages { get => userPrivelages;}
+
 
         // empty constructor to get the admin account rolling so users can be managed from it later
         public Userhandling() 
@@ -45,7 +55,7 @@ namespace ProjectAssingment_Team_Strawberry
         public void CreateUser(List<Userhandling> Users, Userhandling currentUser)
         {
             string tempString;
-            bool checkingBool = false;
+            bool checkingBool;
             int countingInt = 0;
             List<string> savedInfo = new List<string> { };
             string placeHolder;
@@ -103,8 +113,6 @@ namespace ProjectAssingment_Team_Strawberry
                     } while (tempString != savedInfo[1].ToString());
                 }
             } while (checkingBool == false);
-            checkingBool = false;
-            countingInt = 0;
             Console.Clear();
             Console.WriteLine("Please enter the First name of the Account holder\n");
             tempString = Console.ReadLine();
@@ -149,8 +157,8 @@ namespace ProjectAssingment_Team_Strawberry
             CorrectInput(savedInfo, tempString, placeHolder);
             Console.Clear();
             Console.WriteLine("This is the current Saved information\n");
-            Console.WriteLine($"Name:{savedInfo[0].ToString()}\nPassword: {savedInfo[1].ToString()}\nFirst Name: {savedInfo[2].ToString()}\nLast Name: {savedInfo[3].ToString()}\n" +
-                $"BirthDate: {savedInfo[4].ToString()}\nCountry: {savedInfo[5].ToString()}\nAdress: {savedInfo[6].ToString()}\nPostal Code: {savedInfo[7].ToString()}\nCity Name: {savedInfo[8].ToString()}\n");
+            Console.WriteLine($"Name:{savedInfo[0]}\nPassword: {savedInfo[1]}\nFirst Name: {savedInfo[2]}\nLast Name: {savedInfo[3]}\n" +
+                $"BirthDate: {savedInfo[4]}\nCountry: {savedInfo[5]}\nAdress: {savedInfo[6]}\nPostal Code: {savedInfo[7]}\nCity Name: {savedInfo[8]}\n");
             Console.WriteLine("Is this information correct? Y/N");
             yesorno = Console.ReadKey(false).Key;
             if (yesorno == ConsoleKey.Y)
@@ -192,7 +200,6 @@ namespace ProjectAssingment_Team_Strawberry
                 {
                     Userhandling NewUser = new Userhandling(savedInfo[0].ToString(), savedInfo[1].ToString(), savedInfo[2].ToString(), savedInfo[3].ToString(), savedInfo[4].ToString(), savedInfo[5].ToString(), savedInfo[6].ToString(), savedInfo[7].ToString(), savedInfo[8].ToString(), "CUSTOMER");
                     Users.Add(NewUser);
-                    checkingBool = true;
                     Console.WriteLine("Welcome as a new Customer to the bank!");
                     Thread.Sleep(6000);
                 }
@@ -220,7 +227,7 @@ namespace ProjectAssingment_Team_Strawberry
         public virtual void CorrectInput(List<string> savedinfo, string tempString,string placeholder)
         {
             ConsoleKey yesorno;
-            int tempArrayIndex = 0;
+            
             int screenClearInt = 0;
             bool loopTrigger = true;
             Console.Clear();
@@ -231,7 +238,7 @@ namespace ProjectAssingment_Team_Strawberry
                     if (tempString == savedinfo[i].ToString() ) 
                     {
                         Console.WriteLine($"Is this {placeholder} Correct? : {savedinfo[i]} \nY to continue to next entry");
-                        tempArrayIndex = i;
+                        int tempArrayIndex = i;
                         yesorno = Console.ReadKey().Key;
                         if (yesorno == ConsoleKey.Y)
                         {
@@ -251,12 +258,11 @@ namespace ProjectAssingment_Team_Strawberry
                 }
             } while (loopTrigger == true);
         }
-        //checks if the inputed info is correct, if not then keeps looping until it is
-        public virtual void CorrectInput(List<string> savedinfo, int tempInt) 
+        //checks if the inputed info is correct, if not then keeps looping until it is , integer overload if needed later
+        public virtual void CorrectInput(List<int> savedinfo, int tempInt, string placeholder) 
         {
             ConsoleKey yesorno;
-            int tempArrayIndex = 99;
-            int temp = 0;
+            int tempArrayIndex;
             int screenClearInt = 0;
             bool loopTrigger = true;
             Console.Clear();
@@ -264,9 +270,9 @@ namespace ProjectAssingment_Team_Strawberry
             {
                 for (int i = 0; i < savedinfo.Count; i++)
                 {
-                    if (tempInt == int.Parse(savedinfo[i].ToString())) 
+                    if (tempInt == savedinfo[i]) 
                     {
-                        Console.WriteLine($"Is this info Correct? : {savedinfo[i]} \nY to continue to next entry");
+                        Console.WriteLine($"Is this {placeholder} Correct? : {savedinfo[i]} \nY to continue to next entry");
                         tempArrayIndex = i;
                         yesorno = Console.ReadKey().Key;
                         if (yesorno == ConsoleKey.Y)
@@ -277,9 +283,9 @@ namespace ProjectAssingment_Team_Strawberry
                         else
                         {
                             Console.WriteLine("Then please enter the info again\n");
-                            if (int.TryParse(Console.ReadLine(), out temp))
+                            if (int.TryParse(Console.ReadLine(), out int temp))
                             {
-                                savedinfo[int.Parse(tempArrayIndex.ToString())] = temp.ToString();
+                                savedinfo[tempArrayIndex] = temp;
                             }
 
                             if (screenClearInt == 3) Console.Clear(); screenClearInt = 0; // simple clean-up of the screen if they are looping too much
