@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace ProjectAssingment_Team_Strawberry
 {
-    internal class Userhandling : Menus
+    internal class Userhandling
     {
         // keeping default as an admin account, this should be removed once the system is published
         public string userName = "admin";
@@ -105,7 +105,7 @@ namespace ProjectAssingment_Team_Strawberry
                         Console.WriteLine("the passwords you entered did not match! \n please try again\n");
                         Console.WriteLine("Please enter you Password for the account\n");
                         tempString = Console.ReadLine();
-                        savedInfo.Add(tempString);
+                        savedInfo[1] = tempString;
                         Console.WriteLine("Please confirm you password\n");
                         tempString = Console.ReadLine();
                         if (countingInt == 3) Console.Clear(); countingInt = 0; ; // simple clean-up of the screen if they are looping too much
