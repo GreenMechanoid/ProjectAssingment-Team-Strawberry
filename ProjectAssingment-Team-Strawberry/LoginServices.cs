@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace ProjectAssingment_Team_Strawberry
 {
-    internal class LoginServices : Userhandling
+    internal class LoginServices
     {
         //empty constructor, login creds and such is in user, this is a middle hand class that has the code for login and attempts
         public bool loginSuccess = false;
