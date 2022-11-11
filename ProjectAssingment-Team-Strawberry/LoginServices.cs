@@ -26,7 +26,7 @@ namespace ProjectAssingment_Team_Strawberry
                     {
                         Console.WriteLine($"Username / Password was incorrect!, please try again. Attempts Left : {3 - user.loginAttempts}");
                         user.loginAttempts++;
-                        if (loginAttempts == 3)
+                        if (user.loginAttempts == 3)
                         {
                             user.lockedLogin = true;
                             Console.WriteLine("You have done all attempts allowed. Your account has been locked\n please contact a Administrator to unlock it");
