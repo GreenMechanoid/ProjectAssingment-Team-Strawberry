@@ -11,7 +11,7 @@ namespace ProjectAssingment_Team_Strawberry
     {
         // keeping default as an admin account, this should be removed once the system is published
         public string userName = "admin";
-        private readonly string password = "admin"; // will not be hashing the password due to this being a assignment and all partys needs to be able to access it.
+        private string password = "admin"; // will not be hashing the password due to this being a assignment and all partys needs to be able to access it.
         private readonly string firstName = "admin";
         private readonly string lastName = "adminsson";
         protected string birthDate = "2000-01-12";
@@ -25,7 +25,7 @@ namespace ProjectAssingment_Team_Strawberry
         public int loginAttempts = 0; // always start at 0 attempts from created accounts
         public bool lockedLogin = false; // can't be locked if the attempts havn't been made
 
-        public string Password { get => password;}
+        public string Password { get => password; set => password = value; }
         public string FirstName { get => firstName;}
         public string LastName { get => lastName;}
         public string UserPrivelages { get => userPrivelages;}
@@ -37,7 +37,7 @@ namespace ProjectAssingment_Team_Strawberry
 
         }
         // used later to make new user's during runtime
-        protected Userhandling(string userName, string password, string fName, string lName, string birthDate, string country, string street, string postalCode, string cityName, string privlages)
+        public Userhandling(string userName, string password, string fName, string lName, string birthDate, string country, string street, string postalCode, string cityName, string privlages)
         {
             this.userName = userName.ToLower(); //converting to lowercase to store the information
             this.password = password;
@@ -60,10 +60,6 @@ namespace ProjectAssingment_Team_Strawberry
             List<string> savedInfo = new List<string> { };
             string placeHolder;
             ConsoleKey yesorno;
-            if (Users.Count == 0)
-            {
-                Users.Add(currentUser);
-            }
 
             Console.Clear();
             Console.WriteLine("Welcome to the bank 'New User' Please enter your information so we can set you up with an account");
@@ -296,6 +292,56 @@ namespace ProjectAssingment_Team_Strawberry
                 }
 
             } while (loopTrigger == true);
+        }
+
+        public void UserSupport(List<Userhandling> users)
+        {
+            bool doneyet = false;
+            int switcheroo = 0;
+            do
+            {
+
+                Console.WriteLine("Please enter the Account name of the user");
+                string tempUser = Console.ReadLine();
+
+                switch (switcheroo)
+                {
+                    default:
+                        Console.WriteLine("1: remove bruteforce lockout");
+                        Console.WriteLine($"2: Change password on {tempUser}");
+                        int.TryParse(Console.ReadLine(), out switcheroo);
+                        break;
+                    case 1:
+                        foreach (Userhandling user in users)
+                        {
+                            if (user.userName == tempUser)
+                            {
+                                user.lockedLogin = false;
+                                user.loginAttempts = 0;
+                                Console.WriteLine($"This account {user.userName} is now unlocked");
+                                    doneyet = true;
+                                Thread.Sleep(2400);
+                            }
+                        }
+                        goto default;
+                    case 2:
+                        Console.WriteLine("enter new password: ");
+                        string tempPass = Console.ReadLine();
+                        foreach (Userhandling user in users)
+                        {
+                            if (user.userName == tempUser)
+                            {
+                                user.password = tempPass;
+                                Console.WriteLine($"This accounts ({user.userName}) Password is now {user.password}");
+                                doneyet = true;
+                                Thread.Sleep(2400);
+                            }
+                        }
+                        goto default;
+                }
+            
+            } while (!doneyet);
+
         }
     }
 }
