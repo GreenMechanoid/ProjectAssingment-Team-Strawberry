@@ -97,7 +97,7 @@ namespace ProjectAssingment_Team_Strawberry
 
 					int.TryParse(Console.ReadLine(), out this.menuChoise);
 					//simple if to check that the number is corrisponding to a 'Menu Item'
-					if (this.menuChoise == 1 || this.menuChoise == 2 || this.menuChoise == 34 || this.menuChoise == 35)  // ** expand with the numbers of the menu items
+					if (this.menuChoise == 1 || this.menuChoise == 2 || this.menuChoise == 3 || this.menuChoise == 34 || this.menuChoise == 35)  // ** expand with the numbers of the menu items
 					{
 						this.isAChoice = true;
 					}
@@ -112,7 +112,12 @@ namespace ProjectAssingment_Team_Strawberry
                         Thread.Sleep(1200);
                         StartMenu();
 						break;
-                    case 34:
+					case 3:
+						this.menuChoise = 0;
+						Console.WriteLine("Welcome to your bank!");
+						user.UserBank(user);
+						goto default;
+					case 34:
 					// Creation of user , ouput from system handled inside respective class that handles the stuff
 					this.menuChoise = 0;
 					Console.WriteLine("Welcome to User Creation Service");

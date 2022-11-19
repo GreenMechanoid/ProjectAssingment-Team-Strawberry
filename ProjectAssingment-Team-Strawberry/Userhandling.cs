@@ -343,5 +343,18 @@ namespace ProjectAssingment_Team_Strawberry
             } while (!doneyet);
 
         }
+        public void ShowMyAccountsBalance(Userhandling currentUser)
+        {
+
+            /*
+             * for loop, i >= myaccounts.count
+             * print to screen currentuser.myaccounts[i].name + currentuser.myaccounts[i].balance
+            */
+
+        }
+        public void UserBank(Userhandling currentuser)
+        { 
+            
+        }
     }
 }
