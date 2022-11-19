@@ -24,13 +24,13 @@ namespace ProjectAssingment_Team_Strawberry
 
             foreach (Userhandling user in Users.FindAll(un => un.userName == tempUserName))
             { 
-                BankAccounts newAccount = new BankAccounts();
+            BankAccounts newAccount = new BankAccounts();
 
-                Console.WriteLine("Please enter the account Number");
+            Console.WriteLine("Please enter the account Number");
 
-                newAccount.account = Console.ReadLine();
+            newAccount.account = Console.ReadLine();
 
-                user.MyAccounts.Add(newAccount);
+            user.MyAccounts.Add(newAccount);
 
                 
             }
