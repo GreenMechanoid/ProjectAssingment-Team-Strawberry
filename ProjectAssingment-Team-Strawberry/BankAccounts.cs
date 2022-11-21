@@ -11,6 +11,7 @@ namespace ProjectAssingment_Team_Strawberry
         public string accountType; // toUpper or toLower
         public string currencyType; // toUpper or toLower
         public float intrestRate;
+        public string standardCurrency = "sek";
 
         List<string> transactionLog = new List<string>();
         
@@ -35,17 +36,17 @@ namespace ProjectAssingment_Team_Strawberry
             }
 
         }
-        public void transferMoney(string account1, string account2)
-        {
+        //public void transferMoney(string account1, string account2)
+        //{
 
-            MyAccounts.FindAll("hitta första kontot");
+        //    MyAccounts.FindAll("hitta första kontot");
 
-            double tempvalue; // plocka bort för att ge till andra kontot
+        //    double tempvalue; // plocka bort för att ge till andra kontot
 
-            MyAccounts.FindIndex("konto nummer 2");
-            MyAccounts["konto"] += tempvalue;
+        //    MyAccounts.FindIndex("konto nummer 2");
+        //    MyAccounts["konto"] += tempvalue;
 
-        }
+        //}
         public void transferAccountToAnother(Userhandling user1, Userhandling user2)
         {
 
@@ -56,7 +57,7 @@ namespace ProjectAssingment_Team_Strawberry
                 foreach (BankAccounts account2 in user2.MyAccounts.FindAll(acc2 => acc2.account == "Name"))
                 {
 
-                    double tempBalance; // + - transaction
+                    double tempBalance = 0; // + - transaction
 
 
                     tempBalance -= account.balance;

@@ -353,5 +353,9 @@ namespace ProjectAssingment_Team_Strawberry
             */
 
         }
+        public void UserBank(Userhandling currentuser)
+        { 
+            
+        }
     }
 }
