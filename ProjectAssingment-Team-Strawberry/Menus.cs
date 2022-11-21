@@ -88,7 +88,7 @@ namespace ProjectAssingment_Team_Strawberry
 				default:
 					Console.Clear();
 						Console.WriteLine("1: Login as another User");
-						if (user.UserPrivelages == "ADMIN") 
+						if (currentUser.UserPrivelages == "ADMIN") 
 						{ 
 							Console.WriteLine("34: Create User");
 							Console.WriteLine("35: User Support");
@@ -107,7 +107,7 @@ namespace ProjectAssingment_Team_Strawberry
 					}
 						break;
 					case 1:
-						login.LoginUser(Users);
+						currentUser = login.LoginUser(Users);
                         Console.WriteLine("Returning to startmenu..");
                         Thread.Sleep(1200);
                         StartMenu();
@@ -122,13 +122,15 @@ namespace ProjectAssingment_Team_Strawberry
 					this.menuChoise = 0;
 					Console.WriteLine("Welcome to User Creation Service");
 					user.CreateUser(Users, user);
-					 goto default;
+						StartMenu();
+						break;
                     case 35:
                         // Creation of user , ouput from system handled inside respective class that handles the stuff
                         this.menuChoise = 0;
                         Console.WriteLine("Welcome to User Support Services");
                         user.UserSupport(Users);
-                        goto default;
+                        StartMenu();
+                        break;
                     case 2:
 					Console.Clear();
 					Console.WriteLine("Returning to Mainmenu..");
