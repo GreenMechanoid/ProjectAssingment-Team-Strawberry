@@ -30,6 +30,7 @@ namespace ProjectAssingment_Team_Strawberry
         public string LastName { get => lastName;}
         public string UserPrivelages { get => userPrivelages;}
 
+        public List<BankAccounts> MyAccounts;
 
         // empty constructor to get the admin account rolling so users can be managed from it later
         public Userhandling() 
@@ -341,6 +342,15 @@ namespace ProjectAssingment_Team_Strawberry
                 }
             
             } while (!doneyet);
+
+        }
+        public void ShowMyAccountsBalance(Userhandling currentUser)
+        {
+
+            /*
+             * for loop, i >= myaccounts.count
+             * print to screen currentuser.myaccounts[i].name + currentuser.myaccounts[i].balance
+            */
 
         }
     }
