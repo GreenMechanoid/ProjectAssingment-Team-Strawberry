@@ -25,7 +25,7 @@ namespace ProjectAssingment_Team_Strawberry
             {
                 if (account.currencyType!="sek")
                 {
-                    //allowedToLoan += account.currencyConverter("", "", 1) Måste implementeras senare  // annan valuta
+                    //allowedToLoan += accountName.currencyConverter("", "", 1) Måste implementeras senare  // annan valuta
                 }
                 else
                 {

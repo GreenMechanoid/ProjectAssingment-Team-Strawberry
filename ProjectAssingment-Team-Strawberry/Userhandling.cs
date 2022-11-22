@@ -9,7 +9,7 @@ namespace ProjectAssingment_Team_Strawberry
 {
     internal class Userhandling
     {
-        // keeping default as an admin account, this should be removed once the system is published
+        // keeping default as an admin accountName, this should be removed once the system is published
         public string userName = "admin";
         private string password = "admin"; // will not be hashing the password due to this being a assignment and all partys needs to be able to access it.
         private readonly string firstName = "admin";
@@ -30,9 +30,9 @@ namespace ProjectAssingment_Team_Strawberry
         public string LastName { get => lastName;}
         public string UserPrivelages { get => userPrivelages;}
 
-        public List<BankAccounts> MyAccounts;
+        public List<BankAccounts> MyAccounts = new List<BankAccounts>();
 
-        // empty constructor to get the admin account rolling so users can be managed from it later
+        // empty constructor to get the admin accountName rolling so users can be managed from it later
         public Userhandling() 
         {
 
@@ -344,13 +344,14 @@ namespace ProjectAssingment_Team_Strawberry
             } while (!doneyet);
 
         }
+
+        //Simple method that goes through the accounts in a user and prints name and balance of the account
         public void ShowMyAccountsBalance(Userhandling currentUser)
         {
-
-            /*
-             * for loop, i >= myaccounts.count
-             * print to screen currentuser.myaccounts[i].name + currentuser.myaccounts[i].balance
-            */
+            foreach (var accounts in currentUser.MyAccounts)
+            {
+                Console.WriteLine($"Account number: {accounts.accountName} Balance : {accounts.balance}");
+            }
 
         }
         public void UserBank(Userhandling currentuser)

@@ -14,7 +14,8 @@ namespace ProjectAssingment_Team_Strawberry
         LoginServices login;
         Userhandling currentUser;
 		Userhandling admin; 
-		Userhandling guest; 
+		Userhandling guest;
+		BankAccounts accounts;
         List<Userhandling> Users;
 
 		public Menus()
@@ -25,7 +26,8 @@ namespace ProjectAssingment_Team_Strawberry
             guest = new Userhandling("guest", "guest", "guest", "guest",
             "guest", "guest", "guest", "guest", "guest", "guest");
             Users.Add(admin);// added for testing, it has admin currently
-            Users.Add(guest);// added in for non admin account, also for testing logins
+            Users.Add(guest);// added in for non admin accountName, also for testing logins
+			accounts = new BankAccounts();
         }
         public void StartMenu()
         {
@@ -38,16 +40,17 @@ namespace ProjectAssingment_Team_Strawberry
                 switch (this.menuChoise)
                 {
                     default: // default is user's choices, writeline messages with the choices available.
-
+						this.menuChoise = 0;
                         Console.Clear();
                         //login to system
                         Console.WriteLine("1: User Management");
+						Console.WriteLine("2: transfer test");
                         Console.WriteLine("99: Terminate Program");
                         do
                         {
                             int.TryParse(Console.ReadLine(), out this.menuChoise);
                             //simple if to check that the number is corrisponding to a 'Menu Item'
-                            if (this.menuChoise == 1 || this.menuChoise == 99)  // ** expand with the numbers of the menu items
+                            if (this.menuChoise == 1 || this.menuChoise == 2 || this.menuChoise == 99)  // ** expand with the numbers of the menu items
                             {
                                 this.isAChoice = true;
                             }
@@ -66,6 +69,11 @@ namespace ProjectAssingment_Team_Strawberry
 						{
 							UserManagement(Users, currentUser);
 						}
+                        goto default;
+                    case 2:
+						accounts.createBankAccounts(Users);
+                        accounts.createBankAccounts(Users);
+                        accounts.transferAccountToAnother(admin,guest);
                         goto default;
                     case 99: //Termination Selection
                         this.loopIsRunning = false; // to terminate the do while after choice is to terminate the program
