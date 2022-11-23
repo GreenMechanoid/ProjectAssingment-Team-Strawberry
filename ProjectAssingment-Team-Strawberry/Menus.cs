@@ -73,7 +73,7 @@ namespace ProjectAssingment_Team_Strawberry
                     case 2:
 						accounts.createBankAccounts(Users);
                         accounts.createBankAccounts(Users);
-                        accounts.transferAccountToAnother(admin,guest);
+                        accounts.transferMoney(admin,guest);
                         goto default;
                     case 99: //Termination Selection
                         this.loopIsRunning = false; // to terminate the do while after choice is to terminate the program

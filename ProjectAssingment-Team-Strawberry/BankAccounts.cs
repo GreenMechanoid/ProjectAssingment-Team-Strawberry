@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace ProjectAssingment_Team_Strawberry
 {
@@ -71,46 +72,62 @@ namespace ProjectAssingment_Team_Strawberry
         //    MyAccounts["konto"] += tempvalue;
 
         //}
-        public void transferAccountToAnother(Userhandling user1, Userhandling user2)
+        public void transferMoney(Userhandling user1, Userhandling user2)
         {
             bool loopCheck = false;
             double tempBalance = 0; // + - transaction
+            string tempacc, tempacc2; //account name holders for the lambda expressions
+
+            foreach (var account in user1.MyAccounts)
+            {
+                Console.WriteLine($"Account Name: {account.accountName}");
+            }
+            Console.WriteLine("\n please enter the account name from where the transfer is happening");
+
+            tempacc = Console.ReadLine();
+
+            foreach (var account in user2.MyAccounts)
+            {
+                Console.WriteLine($"Account Name: {account.accountName}");
+            }
+            Console.WriteLine("\n please enter the account name where the transfer is going");
+
+            tempacc2 = Console.ReadLine();
+
             Console.WriteLine("Please enter the ammount you wish to transfer");
             
             do
             {
                 if (double.TryParse(Console.ReadLine(), out tempBalance))
                 {
-                    foreach (BankAccounts account in user1.MyAccounts.FindAll(acc => acc.accountName == "Name"))
+                    foreach (BankAccounts account in user1.MyAccounts.FindAll(acc => acc.accountName == tempacc))
                     {
 
-
-                        foreach (BankAccounts account2 in user2.MyAccounts.FindAll(acc2 => acc2.accountName == "Name"))
+                        if ( account.balance >= tempBalance)
                         {
-
-
-
-                            tempBalance -= account.balance;
-
-                            if (account.balance < 0)
-                            {
-                                tempBalance += account.balance;
-                                Console.WriteLine("NOT ENOUGH MONEY! EXTERMINATE!");
-                                return;
-                            }
-
-                            account.transactionLog.Add($" Amount was removed {tempBalance - account.balance}");
-                            tempBalance += account2.balance;
-                            account2.transactionLog.Add($" Amount was removed {tempBalance - account2.balance}");
-
+                            account.balance -= tempBalance;
+                            account.transactionLog.Add($" Amount was transfered {tempBalance}");
                         }
+                        else
+                        {
+                            Console.WriteLine("Transfer Failed, balance to low");
+                            Thread.Sleep(2000);
+                            return;
+                        }
+
+
+                    }
+                    foreach (BankAccounts account2 in user2.MyAccounts.FindAll(acc2 => acc2.accountName == tempacc2))
+                    {
+                        tempBalance += account2.balance;
+                        account2.transactionLog.Add($" Amount was recived {tempBalance}");
 
                     }
                     loopCheck = true;
                 }
                 else
                 {
-                    Console.WriteLine("That was not a correct input");
+                    Console.WriteLine("That was not a correct input, try inputting a number for the transfer again.");
                 }
                 
 
@@ -118,6 +135,11 @@ namespace ProjectAssingment_Team_Strawberry
             
 
             
+        }
+
+        public void transferAccountToAnother(Userhandling user1, Userhandling user2) 
+        {
+        
         }
         public void currencyConverter(string currency, string currency2, double exchangeRate)
         {
