@@ -17,9 +17,11 @@ namespace ProjectAssingment_Team_Strawberry
 
         List<string> transactionLog = new List<string>();
         
-
-        // method contains checking if the username exists, still needs to implement a check if the account actually exists as well
-        //currently testing in Menus - option 2, by creating 2 accounts and then transfer stuff, checking done in run-break mode
+        /// <summary>
+        /// Method that creates new bankaccounts for a user, takes in the "DB table" with users 
+        /// (list in this program as no DB connection)
+        /// </summary>
+        /// <param name="Users"></param>
         public void createBankAccounts(List<Userhandling> Users)
         {
             string tempUserName;
@@ -66,17 +68,12 @@ namespace ProjectAssingment_Team_Strawberry
                 
 
         }
-        //public void transferMoney(string account1, string account2)
-        //{
 
-        //    MyAccounts.FindAll("hitta första kontot");
-
-        //    double tempvalue; // plocka bort för att ge till andra kontot
-
-        //    MyAccounts.FindIndex("konto nummer 2");
-        //    MyAccounts["konto"] += tempvalue;
-
-        //}
+        /// <summary>
+        /// Method for transfering between 2 User's bank accounts
+        /// </summary>
+        /// <param name="user1"></param>
+        /// <param name="user2"></param>
         public void transferMoney(Userhandling user1, Userhandling user2)
         {
             bool loopCheck = false;
@@ -142,9 +139,67 @@ namespace ProjectAssingment_Team_Strawberry
             
         }
 
-        public void transferAccountToAnother(Userhandling user1, Userhandling user2) 
+        /// <summary>
+        /// method for transgering money between "this" user's accounts
+        /// </summary>
+        /// <param name="currentUser"></param>
+        public void transferMoney(Userhandling currentUser)
         {
-        
+            bool loopCheck = false;
+            double tempBalance = 0; // + - transaction
+            string tempacc, tempacc2; //account name holders for the lambda expressions
+
+            foreach (var account in currentUser.MyAccounts)
+            {
+                Console.WriteLine($"Account Name: {account.accountName}");
+            }
+            Console.WriteLine("\n please enter the account name from where the transfer is happening");
+
+            tempacc = Console.ReadLine();
+
+            Console.WriteLine("\n please enter the account name where the transfer is going to");
+
+            tempacc2 = Console.ReadLine();
+
+            Console.WriteLine("Please enter the ammount you wish to transfer");
+
+            do
+            {
+                if (double.TryParse(Console.ReadLine(), out tempBalance))
+                {
+                    foreach (BankAccounts account in currentUser.MyAccounts.FindAll(acc => acc.accountName == tempacc))
+                    {
+
+                        if (account.balance >= tempBalance)
+                        {
+                            account.balance -= tempBalance;
+                            account.transactionLog.Add($" Amount was transfered {tempBalance}");
+                            foreach (BankAccounts account2 in currentUser.MyAccounts.FindAll(acc2 => acc2.accountName == tempacc2))
+                            {
+                                tempBalance += account2.balance;
+                                account2.transactionLog.Add($" Amount was recived {tempBalance}");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Transfer Failed, balance to low");
+                            Thread.Sleep(2000);
+                            return;
+                        }
+                    }
+
+                    loopCheck = true;
+                }
+                else
+                {
+                    Console.WriteLine("That was not a correct input, try inputting a number for the transfer again.");
+                }
+
+
+            } while (loopCheck == false);
+
+
+
         }
         public void currencyConverter(string currency, string currency2, double exchangeRate)
         {

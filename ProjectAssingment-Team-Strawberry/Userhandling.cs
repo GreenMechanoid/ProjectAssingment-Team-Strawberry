@@ -52,7 +52,11 @@ namespace ProjectAssingment_Team_Strawberry
             this.userPrivelages = privlages.ToUpper();
         }
 
-        //takes in the current List of users in the "database"
+        /// <summary>
+        /// Creates a New user and adds it to the "DB Table" (list)
+        /// </summary>
+        /// <param name="Users">All Users from "DB" (list)</param>
+        /// <param name="currentUser"></param>
         public void CreateUser(List<Userhandling> Users, Userhandling currentUser)
         {
             string tempString;
@@ -203,7 +207,12 @@ namespace ProjectAssingment_Team_Strawberry
             }
         }
 
-        //checks if username already exists in the "database".
+        /// <summary>
+        /// checks if username already exists in the "DB table".
+        /// </summary>
+        /// <param name="userList"></param>
+        /// <param name="username">takes in the username that needs to be checked</param>
+        /// <returns></returns>
         public bool CheckUserName(List<Userhandling> userList, string username) 
         {
 
@@ -221,6 +230,12 @@ namespace ProjectAssingment_Team_Strawberry
             return false;
         }
 
+        /// <summary>
+        /// Asks the user if the input they gave is correct
+        /// </summary>
+        /// <param name="savedinfo"></param>
+        /// <param name="tempString"></param>
+        /// <param name="placeholder"></param>
         public void CorrectInput(List<string> savedinfo, string tempString,string placeholder)
         {
             ConsoleKey yesorno;
@@ -255,7 +270,13 @@ namespace ProjectAssingment_Team_Strawberry
                 }
             } while (loopTrigger == true);
         }
-        //checks if the inputed info is correct, if not then keeps looping until it is , integer overload if needed later
+
+        /// <summary>
+        /// Asks the user if the input they gave is correct (integer overload)
+        /// </summary>
+        /// <param name="savedinfo"></param>
+        /// <param name="tempInt"></param>
+        /// <param name="placeholder"></param>
         public void CorrectInput(List<int> savedinfo, int tempInt, string placeholder) 
         {
             ConsoleKey yesorno;
@@ -295,6 +316,10 @@ namespace ProjectAssingment_Team_Strawberry
             } while (loopTrigger == true);
         }
 
+        /// <summary>
+        /// contains various Support functions for the admin to handle other users accounts, (remove lockout, change password)
+        /// </summary>
+        /// <param name="users"></param>
         public void UserSupport(List<Userhandling> users)
         {
             bool doneyet = false;
@@ -345,7 +370,10 @@ namespace ProjectAssingment_Team_Strawberry
 
         }
 
-        //Simple method that goes through the accounts in a user and prints name and balance of the account
+        /// <summary>
+        /// Simple method that goes through the accounts in a user and prints name and balance of the account
+        /// </summary>
+        /// <param name="currentUser"></param>
         public void ShowMyAccountsBalance(Userhandling currentUser)
         {
             foreach (var accounts in currentUser.MyAccounts)

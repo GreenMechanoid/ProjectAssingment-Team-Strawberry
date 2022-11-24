@@ -12,8 +12,12 @@ namespace ProjectAssingment_Team_Strawberry
         public bool loginLocked = false;
         protected string tempUser;
         protected string tempPass;
-        Userhandling tempHolder;
 
+        /// <summary>
+        /// Checks the inputed username and password
+        /// </summary>
+        /// <param name="users"></param>
+        /// <returns></returns>
         public Userhandling LoginUser(List<Userhandling> users)
         {
             Console.WriteLine("Please enter the Username\n");
@@ -37,7 +41,6 @@ namespace ProjectAssingment_Team_Strawberry
                     {
                         Console.WriteLine($"Login successfull, Welcome {user.FirstName} {user.LastName}");
                         loginSuccess = true;
-                        tempHolder = user;
                         Thread.Sleep(3000);
                         return user;
                     }
