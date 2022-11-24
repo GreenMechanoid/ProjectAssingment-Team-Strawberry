@@ -54,17 +54,17 @@ namespace ProjectAssingment_Team_Strawberry
                         //login to system
                         Console.WriteLine("1: User Management");
 						Console.WriteLine("2: transfer test");
-                        Console.WriteLine("3. show currentuser account balance test");
+                        
                         if (currentUser != null)
                         {
-                            Console.WriteLine("4. Account menu");
+							Console.WriteLine("3. Account menu");
                         }
                         Console.WriteLine("99: Terminate Program");
                         do
                         {
                             int.TryParse(Console.ReadLine(), out this.menuChoise);
                             //simple if to check that the number is corrisponding to a 'Menu Item'
-                            if (this.menuChoise == 1 || this.menuChoise == 2 || this.menuChoise == 3 || this.menuChoise == 4 && currentUser != null || this.menuChoise == 99)  // ** expand with the numbers of the menu items
+                            if (this.menuChoise == 1 || this.menuChoise == 2 || this.menuChoise == 3 && currentUser != null || this.menuChoise == 99)  // ** expand with the numbers of the menu items
                             {
                                 this.isAChoice = true;
                             }
@@ -90,19 +90,7 @@ namespace ProjectAssingment_Team_Strawberry
                         accounts.transferMoney(admin,guest);
                         goto default;
 					case 3:
-                        if (currentUser != null)
-                        {
-							currentUser.ShowMyAccountsBalance(currentUser);
-						}
-                        else
-                        {
-							admin.ShowMyAccountsBalance(admin);
-                        }
-
-						Thread.Sleep(3500);
-						goto default;
-					case 4:
-						new BankAccounts().accountMenu(currentUser);
+						accounts.accountMenu(currentUser);
 						goto default;
                     case 99: //Termination Selection
                         this.loopIsRunning = false; // to terminate the do while after choice is to terminate the program
