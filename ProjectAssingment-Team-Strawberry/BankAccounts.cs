@@ -72,6 +72,12 @@ namespace ProjectAssingment_Team_Strawberry
         //    MyAccounts["konto"] += tempvalue;
 
         //}
+
+        /// <summary>
+        /// Method for transfering between 2 User's bank accounts
+        /// </summary>
+        /// <param name="user1"></param>
+        /// <param name="user2"></param>
         public void transferMoney(Userhandling user1, Userhandling user2)
         {
             bool loopCheck = false;
@@ -137,6 +143,68 @@ namespace ProjectAssingment_Team_Strawberry
             
         }
 
+        /// <summary>
+        /// method for transgering money between "this" user's accounts
+        /// </summary>
+        /// <param name="currentUser"></param>
+        public void transferMoney(Userhandling currentUser)
+        {
+            bool loopCheck = false;
+            double tempBalance = 0; // + - transaction
+            string tempacc, tempacc2; //account name holders for the lambda expressions
+
+            foreach (var account in currentUser.MyAccounts)
+            {
+                Console.WriteLine($"Account Name: {account.accountName}");
+            }
+            Console.WriteLine("\n please enter the account name from where the transfer is happening");
+
+            tempacc = Console.ReadLine();
+
+            Console.WriteLine("\n please enter the account name where the transfer is going to");
+
+            tempacc2 = Console.ReadLine();
+
+            Console.WriteLine("Please enter the ammount you wish to transfer");
+
+            do
+            {
+                if (double.TryParse(Console.ReadLine(), out tempBalance))
+                {
+                    foreach (BankAccounts account in currentUser.MyAccounts.FindAll(acc => acc.accountName == tempacc))
+                    {
+
+                        if (account.balance >= tempBalance)
+                        {
+                            account.balance -= tempBalance;
+                            account.transactionLog.Add($" Amount was transfered {tempBalance}");
+                            foreach (BankAccounts account2 in currentUser.MyAccounts.FindAll(acc2 => acc2.accountName == tempacc2))
+                            {
+                                tempBalance += account2.balance;
+                                account2.transactionLog.Add($" Amount was recived {tempBalance}");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Transfer Failed, balance to low");
+                            Thread.Sleep(2000);
+                            return;
+                        }
+                    }
+
+                    loopCheck = true;
+                }
+                else
+                {
+                    Console.WriteLine("That was not a correct input, try inputting a number for the transfer again.");
+                }
+
+
+            } while (loopCheck == false);
+
+
+
+        }
         public void transferAccountToAnother(Userhandling user1, Userhandling user2) 
         {
         

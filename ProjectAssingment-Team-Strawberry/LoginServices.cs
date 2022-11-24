@@ -12,7 +12,6 @@ namespace ProjectAssingment_Team_Strawberry
         public bool loginLocked = false;
         protected string tempUser;
         protected string tempPass;
-        Userhandling tempHolder;
 
         public Userhandling LoginUser(List<Userhandling> users)
         {
