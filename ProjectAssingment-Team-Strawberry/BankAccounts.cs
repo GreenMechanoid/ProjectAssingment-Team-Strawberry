@@ -16,9 +16,11 @@ namespace ProjectAssingment_Team_Strawberry
 
         List<string> transactionLog = new List<string>();
         
-
-        // method contains checking if the username exists, still needs to implement a check if the account actually exists as well
-        //currently testing in Menus - option 2, by creating 2 accounts and then transfer stuff, checking done in run-break mode
+        /// <summary>
+        /// Method that creates new bankaccounts for a user, takes in the "DB table" with users 
+        /// (list in this program as no DB connection)
+        /// </summary>
+        /// <param name="Users"></param>
         public void createBankAccounts(List<Userhandling> Users)
         {
             string tempUserName;
@@ -61,17 +63,6 @@ namespace ProjectAssingment_Team_Strawberry
                 
 
         }
-        //public void transferMoney(string account1, string account2)
-        //{
-
-        //    MyAccounts.FindAll("hitta första kontot");
-
-        //    double tempvalue; // plocka bort för att ge till andra kontot
-
-        //    MyAccounts.FindIndex("konto nummer 2");
-        //    MyAccounts["konto"] += tempvalue;
-
-        //}
 
         /// <summary>
         /// Method for transfering between 2 User's bank accounts
@@ -204,10 +195,6 @@ namespace ProjectAssingment_Team_Strawberry
 
 
 
-        }
-        public void transferAccountToAnother(Userhandling user1, Userhandling user2) 
-        {
-        
         }
         public void currencyConverter(string currency, string currency2, double exchangeRate)
         {
