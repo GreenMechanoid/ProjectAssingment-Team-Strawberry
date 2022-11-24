@@ -121,7 +121,7 @@ namespace ProjectAssingment_Team_Strawberry
                     }
                     foreach (BankAccounts account2 in user2.MyAccounts.FindAll(acc2 => acc2.accountName == tempacc2))
                     {
-                        tempBalance += account2.balance;
+                        account2.balance +=tempBalance;
                         account2.transactionLog.Add($" Amount was recived {tempBalance}");
 
                     }
@@ -176,7 +176,7 @@ namespace ProjectAssingment_Team_Strawberry
                             account.transactionLog.Add($" Amount was transfered {tempBalance}");
                             foreach (BankAccounts account2 in currentUser.MyAccounts.FindAll(acc2 => acc2.accountName == tempacc2))
                             {
-                                tempBalance += account2.balance;
+                                account2.balance += tempBalance;
                                 account2.transactionLog.Add($" Amount was recived {tempBalance}");
                             }
                         }
@@ -185,7 +185,7 @@ namespace ProjectAssingment_Team_Strawberry
                             Console.WriteLine("Transfer Failed, balance to low");
                             Thread.Sleep(2000);
                             return;
-                        }
+                        }                       
                     }
 
                     loopCheck = true;
@@ -249,18 +249,29 @@ namespace ProjectAssingment_Team_Strawberry
                         createBankAccounts(new List<Userhandling>() { user});
                         Thread.Sleep(6000);
                         goto default;
+                    case 4:
+                        Console.Clear();
+                        Console.WriteLine("Transfer money between own accounts.");
+                        transferMoney(user); 
+                        Thread.Sleep(6000);
+                        goto default;
+                    case 5:
+                        doneyet = true;
+                        break;
                     default:
                         Console.Clear();
                         //login to system
                         Console.WriteLine("1: Balance.");
                         Console.WriteLine("2: Loan.");
-                        Console.WriteLine("3: Go back to menu.");
+                        Console.WriteLine(user.MyAccounts.Count> 0 ? "3: Create a new account":"3: Create account.");
+                        Console.WriteLine("4: Transfers");
+                        Console.WriteLine("5: Go back to start menu.");
 
                         do
                         {
                             int.TryParse(Console.ReadLine(), out switcheroo);
                             //simple if to check that the number is corrisponding to a 'Menu Item'
-                            if (switcheroo == 1 || switcheroo == 2 || switcheroo == 3)  // ** expand with the numbers of the menu items
+                            if (switcheroo == 1 || switcheroo == 2 || switcheroo == 3 || switcheroo == 4 || switcheroo == 5)  // ** expand with the numbers of the menu items
                             {
                                 isAChoice = true;
                             }
