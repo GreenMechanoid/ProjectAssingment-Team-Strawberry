@@ -1,5 +1,6 @@
 # ProjectAssingment-Team-Strawberry
 End project assignment for the C# OOP course By Daniel Svensson, Elias Hammou, Jesper Andersson
+UML image is located in folder "non-program-files"
 
 This is our take on the Banking interface/application for the final project of the "Objektorienterad programmering med C# och .NET" course.
 
