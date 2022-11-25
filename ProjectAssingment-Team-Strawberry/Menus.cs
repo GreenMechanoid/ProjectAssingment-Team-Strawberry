@@ -45,7 +45,6 @@ namespace ProjectAssingment_Team_Strawberry
 			// creating a userInterface with a Switch case
 			if (currentUser == null)
 			{
-				Console.WriteLine("Welcome to the banking system");
 				currentUser = login.LoginUser(Users);
 			}
             do
@@ -80,14 +79,7 @@ namespace ProjectAssingment_Team_Strawberry
                         } while (!this.isAChoice); //keep looping if it's not a number
                         break;
                     case 1:
-						if (currentUser == null)
-						{
-							currentUser = login.LoginUser(Users);
-						}
-						else 
-						{
 							UserManagement(Users, currentUser);
-						}
                         goto default;
 					case 2:
 						accounts.accountMenu(Users,currentUser);

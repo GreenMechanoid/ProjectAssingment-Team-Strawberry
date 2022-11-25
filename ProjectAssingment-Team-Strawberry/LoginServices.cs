@@ -20,6 +20,10 @@ namespace ProjectAssingment_Team_Strawberry
         /// <returns></returns>
         public Userhandling LoginUser(List<Userhandling> users)
         {
+            //Ascii Art
+            Console.WriteLine("                                     \r\n        ████  ████                   \r\n      ██░░░░██░░░░████████           \r\n      ██░░░░░░░░██▒▒▒▒▒▒  ██         \r\n        ██░░░░██▒▒▒▒  ▒▒▒▒▒▒██       \r\n      ██░░░░░░░░██▒▒▒▒▒▒▒▒▒▒▒▒██     \r\n    ██░░░░██░░░░██▒▒▒▒▒▒▒▒▒▒▒▒██     \r\n      ████▒▒████▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒██   \r\n      ██  ▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒  ██   \r\n      ██▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██   \r\n      ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒██   \r\n        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██   \r\n          ██  ▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒██     \r\n            ████▒▒▒▒▒▒▒▒  ▒▒██       \r\n                ████████████         \r\n                                      ");
+            Console.WriteLine("         Welcome To StrawBerry Bank\n\n\n");
+
             Console.WriteLine("Please enter the Username\n");
             tempUser = Console.ReadLine().ToLower();
             Console.WriteLine("and please enter the password\n");
