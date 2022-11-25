@@ -292,6 +292,8 @@ namespace ProjectAssingment_Team_Strawberry
         // Menu options to handle user choices.
         public void accountMenu(List<Userhandling> users,Userhandling user)
         {
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("Welcome to the accountmenu!");
             bool isAChoice = false;
             bool doneyet = false;
@@ -356,8 +358,8 @@ namespace ProjectAssingment_Team_Strawberry
                         Console.WriteLine("3: Loan.");
                         Console.WriteLine(user.MyAccounts.Count> 0 ? "4: Create a new account":"4: Create account.");
                         Console.WriteLine("5: Transfers");
-                        Console.Write(user.UserPrivelages == "ADMIN" ? "\n7: create new account for another user" : ""); 
-                        Console.WriteLine("9: Go back to start menu.");
+                        Console.Write(user.UserPrivelages == "ADMIN" ? "7: create new account for another user" : ""); 
+                        Console.WriteLine("\n9: Go back to start menu.");
 
                         do
                         {
@@ -376,6 +378,7 @@ namespace ProjectAssingment_Team_Strawberry
                 }
 
             } while (!doneyet);
+            Console.ResetColor();
         }
 
     }

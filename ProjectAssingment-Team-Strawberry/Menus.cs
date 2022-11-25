@@ -96,6 +96,8 @@ namespace ProjectAssingment_Team_Strawberry
         }
         public void UserManagement(List<Userhandling> Users, Userhandling user)
 		{
+			Console.BackgroundColor = ConsoleColor.DarkBlue;
+			Console.ForegroundColor = ConsoleColor.Cyan;
 			this.menuChoise = 0;
 			this.loopIsRunning = true;
 			do
@@ -127,32 +129,29 @@ namespace ProjectAssingment_Team_Strawberry
 						currentUser = login.LoginUser(Users);
                         Console.WriteLine("Returning to startmenu..");
                         Thread.Sleep(1200);
-                        StartMenu();
-						break;
+                        goto case 2;
 					
 					case 34:
 					// Creation of user , ouput from system handled inside respective class that handles the stuff
 					this.menuChoise = 0;
 					Console.WriteLine("Welcome to User Creation Service");
 					user.CreateUser(Users, user);
-						StartMenu();
-						break;
+                        goto default;
                     case 35:
                         // Creation of user , ouput from system handled inside respective class that handles the stuff
                         this.menuChoise = 0;
                         Console.WriteLine("Welcome to User Support Services");
                         user.UserSupport(Users);
-                        StartMenu();
-                        break;
+                        goto default;
                     case 2:
 					Console.Clear();
 					Console.WriteLine("Returning to Mainmenu..");
 					Thread.Sleep(1200);
-					StartMenu();
 					this.loopIsRunning = false;
 					 break;
 			}
 			} while (this.loopIsRunning);
-		}
+			Console.ResetColor();
+        }
 	}
 }
