@@ -116,16 +116,14 @@ namespace ProjectAssingment_Team_Strawberry
 				default:
 					Console.Clear();
 						Console.WriteLine("1: Login as another User");
-						if (currentUser.UserPrivelages == "ADMIN") 
-						{ 
-							Console.WriteLine("34: Create User");
-							Console.WriteLine("35: User Support");
-						}
-						Console.WriteLine("2: Return to Previous Menu");
+                        Console.Write(user.UserPrivelages == "ADMIN" ? "2: User Support\n" : "2: Change Password");
+                        Console.WriteLine("3: Return to Previous Menu");
+                        Console.Write(user.UserPrivelages == "ADMIN" ? "34: Create User\n": "");
+                        
 
-					int.TryParse(Console.ReadLine(), out this.menuChoise);
+                        int.TryParse(Console.ReadLine(), out this.menuChoise);
 					//simple if to check that the number is corrisponding to a 'Menu Item'
-					if (this.menuChoise == 1 || this.menuChoise == 2 || this.menuChoise == 34 || this.menuChoise == 35)  // ** expand with the numbers of the menu items
+					if (this.menuChoise == 1 || this.menuChoise == 2 || this.menuChoise == 3 || this.menuChoise == 34)  // ** expand with the numbers of the menu items
 					{
 						this.isAChoice = true;
 					}
@@ -137,8 +135,8 @@ namespace ProjectAssingment_Team_Strawberry
 					case 1:
 						currentUser = login.LoginUser(Users);
                         Console.WriteLine("Returning to startmenu..");
-                        Thread.Sleep(1200);
-                        goto case 2;
+                        Thread.Sleep(2200);
+                        goto case 3;
 					
 					case 34:
 					// Creation of user , ouput from system handled inside respective class that handles the stuff
@@ -146,16 +144,23 @@ namespace ProjectAssingment_Team_Strawberry
 					Console.WriteLine("Welcome to User Creation Service");
 					user.CreateUser(Users, user);
                         goto default;
-                    case 35:
-                        // Creation of user , ouput from system handled inside respective class that handles the stuff
+                    case 2:
+                        if (user.UserPrivelages == "ADMIN")
+                        {
                         this.menuChoise = 0;
                         Console.WriteLine("Welcome to User Support Services");
                         UserSupportMenu(Users);
+                        }
+                        else
+                        {
+                            this.menuChoise = 0;
+                            user.ChangePassword(Users,user.userName);
+                        }
                         goto default;
-                    case 2:
+                    case 3:
 					Console.Clear();
 					Console.WriteLine("Returning to Mainmenu..");
-					Thread.Sleep(1200);
+					Thread.Sleep(2200);
 					this.loopIsRunning = false;
 					 break;
 			}
