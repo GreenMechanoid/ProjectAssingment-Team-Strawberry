@@ -271,6 +271,7 @@ namespace ProjectAssingment_Team_Strawberry
                                     inputCheck = true;
                                     hasDeposited = true;
                                     Console.WriteLine($"amount: {result} has been deposited to Account{account.accountName}");
+                                    account.transactionLog.Add($"amount deposited to account: {result}");
                                 }
                                 else
                                 {
