@@ -150,7 +150,7 @@ namespace ProjectAssingment_Team_Strawberry
                         // Creation of user , ouput from system handled inside respective class that handles the stuff
                         this.menuChoise = 0;
                         Console.WriteLine("Welcome to User Support Services");
-                        UserSupport(Users);
+                        UserSupportMenu(Users);
                         goto default;
                     case 2:
 					Console.Clear();
@@ -186,33 +186,44 @@ namespace ProjectAssingment_Team_Strawberry
 
                     case 1:
                         Console.Clear();
-                        Console.WriteLine("Show balance for accounts.");
+                        Console.WriteLine("balance for your accounts.");
                         accounts.ShowMyAccountsBalance(user);
                         Thread.Sleep(6000);
                         goto default;
                     case 2:
                         Console.Clear();
-                        Console.WriteLine("Deposit to account.");
+
                         accounts.DepositCurrency(user);
                         Thread.Sleep(6000);
                         goto default;
                     case 3:
                         Console.Clear();
-                        Console.WriteLine("Go to loans menu?");
                         Loans Loans = new Loans();
-                        userLoan(user);
+                        userLoanMenu(user);
                         goto default;
                     case 4:
                         Console.Clear();
-                        Console.WriteLine("Create an account.");
                         accounts.createBankAccounts(user);
                         Thread.Sleep(6000);
                         goto default;
                     case 5:
                         Console.Clear();
-                        Console.WriteLine("Transfer money between own accounts.");
                         accounts.transferMoney(user);
                         Thread.Sleep(6000);
+                        goto default;
+                    case 6:
+                        Console.Clear();
+                        Console.WriteLine("Please enter the username of the one reciveing the transfer");
+                        var tempUser = Console.ReadLine();
+                        foreach (var us in users)
+                        {
+                            if (tempUser == us.userName)
+                            {
+                                accounts.transferMoney(user,us);
+
+                            }
+                        }
+                            Thread.Sleep(6000);
                         goto default;
                     case 7:
                         Console.Clear();
@@ -234,7 +245,8 @@ namespace ProjectAssingment_Team_Strawberry
                         Console.WriteLine("2: Deposit to account");
                         Console.WriteLine("3: Loan.");
                         Console.WriteLine(user.MyAccounts.Count > 0 ? "4: Create a new account" : "4: Create account.");
-                        Console.WriteLine("5: Transfers");
+                        Console.WriteLine("5: Transfer money between own accounts.");
+                        Console.WriteLine("6: Transfer money between users.");
                         Console.Write(user.UserPrivelages == "ADMIN" ? "7: create new account for another user" : "");
                         Console.WriteLine("\n9: Go back to start menu.");
 
@@ -242,7 +254,7 @@ namespace ProjectAssingment_Team_Strawberry
                         {
                             int.TryParse(Console.ReadLine(), out switcheroo);
                             //simple if to check that the number is corrisponding to a 'Menu Item'
-                            if (switcheroo == 1 || switcheroo == 2 || switcheroo == 3 || switcheroo == 4 || switcheroo == 7 || switcheroo == 9)  // ** expand with the numbers of the menu items
+                            if (switcheroo == 1 || switcheroo == 2 || switcheroo == 3 || switcheroo == 4 || switcheroo == 5 || switcheroo == 6 || switcheroo == 7 || switcheroo == 9)  // ** expand with the numbers of the menu items
                             {
                                 isAChoice = true;
                             }
@@ -262,7 +274,7 @@ namespace ProjectAssingment_Team_Strawberry
         /// Menu options to handle user choices for loans.
         /// </summary>
         /// <param name="user"></param>
-        public void userLoan(Userhandling user)
+        public void userLoanMenu(Userhandling user)
         {
             Console.WriteLine("Welcome to the loansmenu!");
             bool isAChoice = false;
@@ -332,7 +344,7 @@ namespace ProjectAssingment_Team_Strawberry
         /// contains various Support functions for the admin to handle other users accounts, (remove lockout, change password)
         /// </summary>
         /// <param name="users"></param>
-        public void UserSupport(List<Userhandling> users)
+        public void UserSupportMenu(List<Userhandling> users)
         {
             bool doneyet = false;
             int switcheroo = 0;
