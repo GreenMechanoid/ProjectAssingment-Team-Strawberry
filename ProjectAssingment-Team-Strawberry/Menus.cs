@@ -18,6 +18,7 @@ namespace ProjectAssingment_Team_Strawberry
 		Userhandling guest;
 		BankAccounts accounts;
         List<Userhandling> Users;
+        Loans loan;
 
 		public void createadmin()
 		{
@@ -38,6 +39,7 @@ namespace ProjectAssingment_Team_Strawberry
             Users.Add(admin);// added for testing, it has admin currently
             Users.Add(guest);// added in for non admin accountName, also for testing logins
 			accounts = new BankAccounts();
+            loan = new Loans();
         }
         public void StartMenu()
         {
@@ -83,7 +85,7 @@ namespace ProjectAssingment_Team_Strawberry
 							UserManagement(Users, currentUser);
                         goto default;
 					case 2:
-						accounts.accountMenu(Users,currentUser);
+						accountMenu(Users,currentUser);
 						goto default;
                     case 99: //Termination Selection
                         this.loopIsRunning = false; // to terminate the do while after choice is to terminate the program
@@ -95,6 +97,12 @@ namespace ProjectAssingment_Team_Strawberry
 
             } while (this.loopIsRunning);
         }
+
+        /// <summary>
+        /// Menu options to handle choices for Users.
+        /// </summary>
+        /// <param name="Users"></param>
+        /// <param name="user"></param>
         public void UserManagement(List<Userhandling> Users, Userhandling user)
 		{
 			Console.BackgroundColor = ConsoleColor.DarkBlue;
@@ -142,7 +150,7 @@ namespace ProjectAssingment_Team_Strawberry
                         // Creation of user , ouput from system handled inside respective class that handles the stuff
                         this.menuChoise = 0;
                         Console.WriteLine("Welcome to User Support Services");
-                        user.UserSupport(Users);
+                        UserSupport(Users);
                         goto default;
                     case 2:
 					Console.Clear();
@@ -154,5 +162,210 @@ namespace ProjectAssingment_Team_Strawberry
 			} while (this.loopIsRunning);
 			Console.ResetColor();
         }
-	}
+        /// <summary>
+        /// Menu options to handle user choices for accounts.
+        /// </summary>
+        /// <param name="users"></param>
+        /// <param name="user"></param>
+        public void accountMenu(List<Userhandling> users, Userhandling user)
+        {
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("Welcome to the accountmenu!");
+            bool isAChoice = false;
+            bool doneyet = false;
+            int switcheroo = 0;
+            do
+            {
+
+                Console.WriteLine("Make a choice.");
+
+
+                switch (switcheroo)
+                {
+
+                    case 1:
+                        Console.Clear();
+                        Console.WriteLine("Show balance for accounts.");
+                        accounts.ShowMyAccountsBalance(user);
+                        Thread.Sleep(6000);
+                        goto default;
+                    case 2:
+                        Console.Clear();
+                        Console.WriteLine("Deposit to account.");
+                        accounts.DepositCurrency(user);
+                        Thread.Sleep(6000);
+                        goto default;
+                    case 3:
+                        Console.Clear();
+                        Console.WriteLine("Go to loans menu?");
+                        Loans Loans = new Loans();
+                        userLoan(user);
+                        goto default;
+                    case 4:
+                        Console.Clear();
+                        Console.WriteLine("Create an account.");
+                        accounts.createBankAccounts(user);
+                        Thread.Sleep(6000);
+                        goto default;
+                    case 5:
+                        Console.Clear();
+                        Console.WriteLine("Transfer money between own accounts.");
+                        accounts.transferMoney(user);
+                        Thread.Sleep(6000);
+                        goto default;
+                    case 7:
+                        Console.Clear();
+                        if (user.UserPrivelages == "ADMIN")
+                        {
+                            Console.WriteLine("Create an account.");
+                            accounts.createBankAccounts(users);
+                            Thread.Sleep(6000);
+                            goto default;
+                        }
+                        goto default;
+                    case 9:
+                        doneyet = true;
+                        break;
+                    default:
+                        Console.Clear();
+                        //login to system
+                        Console.WriteLine("1: Balance.");
+                        Console.WriteLine("2: Deposit to account");
+                        Console.WriteLine("3: Loan.");
+                        Console.WriteLine(user.MyAccounts.Count > 0 ? "4: Create a new account" : "4: Create account.");
+                        Console.WriteLine("5: Transfers");
+                        Console.Write(user.UserPrivelages == "ADMIN" ? "7: create new account for another user" : "");
+                        Console.WriteLine("\n9: Go back to start menu.");
+
+                        do
+                        {
+                            int.TryParse(Console.ReadLine(), out switcheroo);
+                            //simple if to check that the number is corrisponding to a 'Menu Item'
+                            if (switcheroo == 1 || switcheroo == 2 || switcheroo == 3 || switcheroo == 4 || switcheroo == 7 || switcheroo == 9)  // ** expand with the numbers of the menu items
+                            {
+                                isAChoice = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Wrong input! , Can't find a matching menu item!");
+                            }
+                        } while (!isAChoice); //keep looping if it's not a number
+                        break;
+                }
+
+            } while (!doneyet);
+            Console.ResetColor();
+        }
+
+        /// <summary>
+        /// Menu options to handle user choices for loans.
+        /// </summary>
+        /// <param name="user"></param>
+        public void userLoan(Userhandling user)
+        {
+            Console.WriteLine("Welcome to the loansmenu!");
+            bool isAChoice = false;
+            bool doneyet = false;
+            int switcheroo = 0;
+            string userAmount;
+            do
+            {
+
+                switch (switcheroo)
+                {
+
+                    case 1:
+                        Console.Clear();
+                        Console.WriteLine("Make a choice and see interestrate.");
+                        userAmount = Console.ReadLine();
+                        var amount = loan.customerInterestAmount(Convert.ToDouble(userAmount));
+                        Console.WriteLine($"You will have to pay an interestamount : {amount}");
+                        Thread.Sleep(4000);
+                        goto default;
+                    case 2:
+                        Console.Clear();
+                        Console.WriteLine("How much do you want to loan?");
+                        userAmount = Console.ReadLine();
+                        bool allowed = loan.issueLoan(user, Convert.ToDouble(userAmount));
+                        if (allowed)
+                        {
+                            Console.WriteLine("You are allowed to loan that amount.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You are not allowed to loan that amount.");
+                        }
+                        Thread.Sleep(4000);
+                        goto default;
+                    case 3:
+                        doneyet = true;
+                        break;
+                    default:
+                        Console.Clear();
+                        //login to system
+                        Console.WriteLine("1: Interestrate amount.");
+                        Console.WriteLine("2: Get a loan.");
+                        Console.WriteLine("3: Go back to menu.");
+
+                        do
+                        {
+                            int.TryParse(Console.ReadLine(), out switcheroo);
+                            //simple if to check that the number is corrisponding to a 'Menu Item'
+                            if (switcheroo == 1 || switcheroo == 2 || switcheroo == 3)  // ** expand with the numbers of the menu items
+                            {
+                                isAChoice = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Wrong input! , Can't find a matching menu item!");
+                            }
+                        } while (!isAChoice); //keep looping if it's not a number
+                        break;
+                }
+
+            } while (!doneyet);
+        }
+
+
+        /// <summary>
+        /// contains various Support functions for the admin to handle other users accounts, (remove lockout, change password)
+        /// </summary>
+        /// <param name="users"></param>
+        public void UserSupport(List<Userhandling> users)
+        {
+            bool doneyet = false;
+            int switcheroo = 0;
+            do
+            {
+
+                Console.WriteLine("Please enter the Account name of the user");
+                string tempUser = Console.ReadLine();
+
+                switch (switcheroo)
+                {
+                    default:
+                        Console.WriteLine("1: remove bruteforce lockout");
+                        Console.WriteLine($"2: Change password on {tempUser}");
+                        Console.WriteLine("3: Return to main menu");
+                        int.TryParse(Console.ReadLine(), out switcheroo);
+                        break;
+                    case 1:
+                        currentUser.RemoveLockout(users,tempUser);
+                        Console.Clear();
+                        goto default;
+                    case 2:
+                        currentUser.ChangePassword(users, tempUser);
+                        Console.Clear();
+                        goto default;
+                    case 3:
+                        doneyet = true;
+                        Thread.Sleep(2400);
+                        break;
+                }
+
+            } while (!doneyet);
+
+        }
+    }
 }

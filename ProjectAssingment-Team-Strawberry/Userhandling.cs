@@ -5,6 +5,7 @@ using System.Dynamic;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Reflection.Metadata;
 
 namespace ProjectAssingment_Team_Strawberry
 {
@@ -317,60 +318,34 @@ namespace ProjectAssingment_Team_Strawberry
             } while (loopTrigger == true);
         }
 
-        /// <summary>
-        /// contains various Support functions for the admin to handle other users accounts, (remove lockout, change password)
-        /// </summary>
-        /// <param name="users"></param>
-        public void UserSupport(List<Userhandling> users)
+        public void RemoveLockout(List<Userhandling> users, string tempUser) 
         {
-            bool doneyet = false;
-            int switcheroo = 0;
-            do
+            foreach (Userhandling user in users)
             {
-
-                Console.WriteLine("Please enter the Account name of the user");
-                string tempUser = Console.ReadLine();
-
-                switch (switcheroo)
+                if (user.userName == tempUser)
                 {
-                    default:
-                        Console.WriteLine("1: remove bruteforce lockout");
-                        Console.WriteLine($"2: Change password on {tempUser}");
-                        int.TryParse(Console.ReadLine(), out switcheroo);
-                        break;
-                    case 1:
-                        foreach (Userhandling user in users)
-                        {
-                            if (user.userName == tempUser)
-                            {
-                                user.lockedLogin = false;
-                                user.loginAttempts = 0;
-                                Console.WriteLine($"This account {user.userName} is now unlocked");
-                                    doneyet = true;
-                                Thread.Sleep(2400);
-                            }
-                        }
-                        goto default;
-                    case 2:
-                        Console.WriteLine("enter new password: ");
-                        string tempPass = Console.ReadLine();
-                        foreach (Userhandling user in users)
-                        {
-                            if (user.userName == tempUser)
-                            {
-                                user.password = tempPass;
-                                Console.WriteLine($"This accounts ({user.userName}) Password is now {user.password}");
-                                doneyet = true;
-                                Thread.Sleep(2400);
-                            }
-                        }
-                        goto default;
+                    user.lockedLogin = false;
+                    user.loginAttempts = 0;
+                    Console.WriteLine($"This account {user.userName} is now unlocked");
                 }
-            
-            } while (!doneyet);
-
+            }
         }
+        public void ChangePassword(List<Userhandling> users, string tempUser)
+        {
+            Console.WriteLine("enter new password: ");
+            string tempPass = Console.ReadLine();
 
+            foreach (Userhandling user in users)
+            {
+                if (user.userName == tempUser)
+                {
+                    user.Password = tempPass;
+                    Console.WriteLine($"This accounts ({user.userName}) Password is now {user.Password}");
+                    
+                    Thread.Sleep(2400);
+                }
+            }
+        }
 
 
     }
