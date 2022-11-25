@@ -1,4 +1,5 @@
 ﻿// .Net22 Daniel Svensson
+// Team Strawberry
 using System;
 using System.Dynamic;
 using System.Collections.Generic;
@@ -370,17 +371,7 @@ namespace ProjectAssingment_Team_Strawberry
 
         }
 
-        /// <summary>
-        /// Simple method that goes through the accounts in a user and prints name and balance of the account
-        /// </summary>
-        /// <param name="currentUser"></param>
-        public void ShowMyAccountsBalance(Userhandling currentUser)
-        {
-            foreach (var accounts in currentUser.MyAccounts)
-            {
-                Console.WriteLine($"Account number: {accounts.accountName} Balance : {accounts.balance}");
-            }
 
-        }
+
     }
 }

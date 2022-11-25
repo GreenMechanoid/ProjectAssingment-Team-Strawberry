@@ -1,4 +1,5 @@
 ﻿//.Net22 Daniel Svensson
+// Team Strawberry
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -20,9 +21,10 @@ namespace ProjectAssingment_Team_Strawberry
         /// <returns></returns>
         public Userhandling LoginUser(List<Userhandling> users)
         {
-            //Ascii Art
+            //Ascii Art and welcome message - start
             Console.WriteLine("                                     \r\n        ████  ████                   \r\n      ██░░░░██░░░░████████           \r\n      ██░░░░░░░░██▒▒▒▒▒▒  ██         \r\n        ██░░░░██▒▒▒▒  ▒▒▒▒▒▒██       \r\n      ██░░░░░░░░██▒▒▒▒▒▒▒▒▒▒▒▒██     \r\n    ██░░░░██░░░░██▒▒▒▒▒▒▒▒▒▒▒▒██     \r\n      ████▒▒████▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒██   \r\n      ██  ▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒  ██   \r\n      ██▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██   \r\n      ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒██   \r\n        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██   \r\n          ██  ▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒██     \r\n            ████▒▒▒▒▒▒▒▒  ▒▒██       \r\n                ████████████         \r\n                                      ");
             Console.WriteLine("         Welcome To StrawBerry Bank\n\n\n");
+            //Ascii Art and welcome message - end
 
             Console.WriteLine("Please enter the Username\n");
             tempUser = Console.ReadLine().ToLower();

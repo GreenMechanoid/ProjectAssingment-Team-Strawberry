@@ -1,4 +1,6 @@
-﻿using System;
+﻿// .Net22 Jesper Andersson
+// Team Strawberry
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;

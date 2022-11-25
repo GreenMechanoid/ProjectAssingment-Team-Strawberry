@@ -1,4 +1,6 @@
-﻿using System;
+﻿// .Net22 Daniel Svensson , Elias Hammou , Jesper Andersson
+// Team Strawberry
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
@@ -242,7 +244,23 @@ namespace ProjectAssingment_Team_Strawberry
             }
 
         }
-        public void DepostiCurrency(Userhandling user)
+        /// <summary>
+        /// Simple method that goes through the accounts in a user and prints name and balance of the account
+        /// </summary>
+        /// <param name="currentUser"></param>
+        public void ShowMyAccountsBalance(Userhandling currentUser)
+        {
+            foreach (var accounts in currentUser.MyAccounts)
+            {
+                Console.WriteLine($"Account number: {accounts.accountName} Balance : {accounts.balance}");
+            }
+
+        }
+        /// <summary>
+        /// Method to add more too the balance of an account
+        /// </summary>
+        /// <param name="user">current User</param>
+        public void DepositCurrency(Userhandling user)
         {
             bool hasDeposited = false;
             bool inputCheck = false;
@@ -310,13 +328,13 @@ namespace ProjectAssingment_Team_Strawberry
                     case 1:
                         Console.Clear();
                         Console.WriteLine("Show balance for accounts.");
-                        user.ShowMyAccountsBalance(user);
+                        ShowMyAccountsBalance(user);
                         Thread.Sleep(6000);
                         goto default;
                     case 2:
                         Console.Clear();
                         Console.WriteLine("Deposit to account.");
-                        DepostiCurrency(user);
+                        DepositCurrency(user);
                         Thread.Sleep(6000);
                         goto default;
                     case 3:

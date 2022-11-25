@@ -1,4 +1,5 @@
-﻿//.Net 22 Daniel Svensson
+﻿// .Net22 Daniel Svensson, Jesper Andersson
+// Team Strawberry
 using System;
 using System.Collections.Generic;
 using System.Text;
