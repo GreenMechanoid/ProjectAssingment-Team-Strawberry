@@ -8,16 +8,18 @@ namespace ProjectAssingment_Team_Strawberry
 {
     class Loans : BankAccounts
     {
-        public float interestRate = 0.1F;
+        double interestRate = 0.1;
         public double ammountLoaned;
         public string creditCheck;
         public float maxAllowedLoan;
 
+        // Method to see Interest Ammount.
         public double customerInterestAmmount(double ammount)
         {
             return ammount * interestRate;
         }
 
+        // Method to check if currentuser can get the loan ammount asked for.
         public bool issueLoan(Userhandling currentUser, double ammount)
         {
             double allowedToLoan = 0;
@@ -35,17 +37,17 @@ namespace ProjectAssingment_Team_Strawberry
             }
             return ammount < allowedToLoan * 5;
         }
+
+        // Menu options to handle user choices.
         public void userLoan(Userhandling user)
         {
             Console.WriteLine("Welcome to the loansmenu!");
             bool isAChoice = false;
             bool doneyet = false;
             int switcheroo = 0;
+            string userAmmount;
             do
             {
-
-                Console.WriteLine("Make a choice.");
-                string userAmmount = Console.ReadLine();
 
                 switch (switcheroo)
                 {
@@ -56,6 +58,7 @@ namespace ProjectAssingment_Team_Strawberry
                         userAmmount = Console.ReadLine();
                         var ammount = customerInterestAmmount(Convert.ToDouble(userAmmount));
                         Console.WriteLine($"You will have to pay an interestammount : {ammount}");
+                        Thread.Sleep(4000);
                         goto default;
                     case 2:
                         Console.Clear();
@@ -70,10 +73,10 @@ namespace ProjectAssingment_Team_Strawberry
                         {
                             Console.WriteLine("You are not allowed to loan that ammount.");
                         }
+                        Thread.Sleep(4000);
                         goto default;
                     case 3:
                         doneyet = true;
-                        Thread.Sleep(2400);
                         break;
                     default:
                         Console.Clear();
@@ -95,7 +98,7 @@ namespace ProjectAssingment_Team_Strawberry
                                 Console.WriteLine("Wrong input! , Can't find a matching menu item!");
                             }
                         } while (!isAChoice); //keep looping if it's not a number
-                        break;
+                        break;  
                 }
 
             } while (!doneyet);
@@ -103,5 +106,3 @@ namespace ProjectAssingment_Team_Strawberry
     }
 }
 
-//Som användare vill jag kunna låna av banken och direkt få se hur mycket ränta jag kommer behöva betala på det lånet
-//Som bankägare vill jag begränsa hur mycket varje kund kan låna av banken så att de maximalt kan låna 5 ggr de pengar de redan har i banken
