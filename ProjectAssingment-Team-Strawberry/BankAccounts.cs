@@ -48,6 +48,7 @@ namespace ProjectAssingment_Team_Strawberry
                     newAccount.balance = Convert.ToDouble(Console.ReadLine());
 
                     user.MyAccounts.Add(newAccount);
+                    Console.WriteLine("Account has been created");
                 }
                     loopingBool = false;
             }
@@ -68,7 +69,34 @@ namespace ProjectAssingment_Team_Strawberry
                 
 
         }
+        /// <summary>
+        /// Overloaded to go create accounts for the Currently loggedin user
+        /// </summary>
+        /// <param name="currentUser"></param>
+        public void createBankAccounts(Userhandling currentUser)
+        {
+            bool loopingBool = true;
 
+            do
+            {
+                BankAccounts newAccount = new BankAccounts();
+
+                Console.WriteLine("Please enter the account Number");
+
+
+                newAccount.accountName = Console.ReadLine().ToUpper();
+
+                Console.WriteLine("Enter an amount to deposit");
+                newAccount.balance = Convert.ToDouble(Console.ReadLine());
+
+                currentUser.MyAccounts.Add(newAccount);
+                    
+                loopingBool = false;
+
+                Console.WriteLine("Account has been created");
+            } while (loopingBool == true);
+
+        }
         /// <summary>
         /// Method for transfering between 2 User's bank accounts
         /// </summary>
@@ -96,7 +124,7 @@ namespace ProjectAssingment_Team_Strawberry
 
             tempacc2 = Console.ReadLine();
 
-            Console.WriteLine("Please enter the ammount you wish to transfer");
+            Console.WriteLine("Please enter the amount you wish to transfer");
             
             do
             {
@@ -161,7 +189,7 @@ namespace ProjectAssingment_Team_Strawberry
 
             tempacc2 = Console.ReadLine();
 
-            Console.WriteLine("Please enter the ammount you wish to transfer");
+            Console.WriteLine("Please enter the amount you wish to transfer");
 
             do
             {
@@ -214,9 +242,54 @@ namespace ProjectAssingment_Team_Strawberry
             }
 
         }
+        public void DepostiCurrency(Userhandling user)
+        {
+            bool hasDeposited = false;
+            bool inputCheck = false;
+            if (user.MyAccounts.Count > 0)
+            {
+                do
+                {
+                    foreach (var account in user.MyAccounts)
+                    {
+                        Console.WriteLine($"Account name: {account.accountName + " Balance before deposit:" + account.balance}");
+                    }
+
+                    Console.WriteLine("please choose a account the deposit will go to");
+                    string input = Console.ReadLine();
+
+                    foreach (var account in user.MyAccounts)
+                    {
+                        if (input == account.accountName)
+                        {
+                            do
+                            {
+                                Console.WriteLine("Please enter the deposited amount: ");
+                                if (double.TryParse(Console.ReadLine(), out double result)) 
+                                {
+                                    account.balance += result;
+                                    inputCheck = true;
+                                    hasDeposited = true;
+                                    Console.WriteLine($"amount: {result} has been deposited to Account{account.accountName}");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("that was not a number, try again");
+                                }
+                            } while (!inputCheck);
+                        }
+                    }
+
+                } while (!hasDeposited);
+            }
+            else
+            {
+                Console.WriteLine($"{user.userName} currently has no accounts to deposit to.. please create one");
+            }
+        }
 
         // Menu options to handle user choices.
-        public void accountMenu(Userhandling user)
+        public void accountMenu(List<Userhandling> users,Userhandling user)
         {
             Console.WriteLine("Welcome to the accountmenu!");
             bool isAChoice = false;
@@ -239,39 +312,57 @@ namespace ProjectAssingment_Team_Strawberry
                         goto default;
                     case 2:
                         Console.Clear();
+                        Console.WriteLine("Deposit to account.");
+                        DepostiCurrency(user);
+                        Thread.Sleep(6000);
+                        goto default;
+                    case 3:
+                        Console.Clear();
                         Console.WriteLine("Go to loans menu?");
                         Loans Loans = new Loans();
                         Loans.userLoan(user);
                         goto default;
-                    case 3:
+                    case 4:
                         Console.Clear();
                         Console.WriteLine("Create an account.");
-                        createBankAccounts(new List<Userhandling>() { user});
+                        createBankAccounts(user);
                         Thread.Sleep(6000);
                         goto default;
-                    case 4:
+                    case 5:
                         Console.Clear();
                         Console.WriteLine("Transfer money between own accounts.");
                         transferMoney(user); 
                         Thread.Sleep(6000);
                         goto default;
-                    case 5:
+                    case 7:
+                        Console.Clear();
+                        if (user.UserPrivelages == "ADMIN")
+                        {
+                            Console.WriteLine("Create an account.");
+                            createBankAccounts(users);
+                            Thread.Sleep(6000);
+                            goto default;
+                        }
+                        goto default;
+                    case 9:
                         doneyet = true;
                         break;
                     default:
                         Console.Clear();
                         //login to system
                         Console.WriteLine("1: Balance.");
-                        Console.WriteLine("2: Loan.");
-                        Console.WriteLine(user.MyAccounts.Count> 0 ? "3: Create a new account":"3: Create account.");
-                        Console.WriteLine("4: Transfers");
-                        Console.WriteLine("5: Go back to start menu.");
+                        Console.WriteLine("2: Deposit to account");
+                        Console.WriteLine("3: Loan.");
+                        Console.WriteLine(user.MyAccounts.Count> 0 ? "4: Create a new account":"4: Create account.");
+                        Console.WriteLine("5: Transfers");
+                        Console.Write(user.UserPrivelages == "ADMIN" ? "\n7: create new account for another user" : ""); 
+                        Console.WriteLine("9: Go back to start menu.");
 
                         do
                         {
                             int.TryParse(Console.ReadLine(), out switcheroo);
                             //simple if to check that the number is corrisponding to a 'Menu Item'
-                            if (switcheroo == 1 || switcheroo == 2 || switcheroo == 3 || switcheroo == 4 || switcheroo == 5)  // ** expand with the numbers of the menu items
+                            if (switcheroo == 1 || switcheroo == 2 || switcheroo == 3 || switcheroo == 4 || switcheroo == 7 || switcheroo == 9)  // ** expand with the numbers of the menu items
                             {
                                 isAChoice = true;
                             }

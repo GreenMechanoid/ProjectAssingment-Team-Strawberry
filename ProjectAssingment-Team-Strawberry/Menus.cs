@@ -42,8 +42,12 @@ namespace ProjectAssingment_Team_Strawberry
         {
             this.menuChoise = 0;
             this.loopIsRunning = true;
-            // creating a userInterface with a Switch case
-			
+			// creating a userInterface with a Switch case
+			if (currentUser == null)
+			{
+				Console.WriteLine("Welcome to the banking system");
+				currentUser = login.LoginUser(Users);
+			}
             do
             {
                 switch (this.menuChoise)
@@ -52,19 +56,20 @@ namespace ProjectAssingment_Team_Strawberry
 						this.menuChoise = 0;
                         Console.Clear();
                         //login to system
+
+
                         Console.WriteLine("1: User Management");
-						Console.WriteLine("2: transfer test");
                         
                         if (currentUser != null)
                         {
-							Console.WriteLine("3. Account menu");
+							Console.WriteLine("2. Account menu");
                         }
                         Console.WriteLine("99: Terminate Program");
                         do
                         {
                             int.TryParse(Console.ReadLine(), out this.menuChoise);
                             //simple if to check that the number is corrisponding to a 'Menu Item'
-                            if (this.menuChoise == 1 || this.menuChoise == 2 || this.menuChoise == 3 && currentUser != null || this.menuChoise == 99)  // ** expand with the numbers of the menu items
+                            if (this.menuChoise == 1 || this.menuChoise == 2 && currentUser != null || this.menuChoise == 99)  // ** expand with the numbers of the menu items
                             {
                                 this.isAChoice = true;
                             }
@@ -84,13 +89,8 @@ namespace ProjectAssingment_Team_Strawberry
 							UserManagement(Users, currentUser);
 						}
                         goto default;
-                    case 2:
-						accounts.createBankAccounts(Users);
-                        accounts.createBankAccounts(Users);
-                        accounts.transferMoney(admin,guest);
-                        goto default;
-					case 3:
-						accounts.accountMenu(currentUser);
+					case 2:
+						accounts.accountMenu(Users,currentUser);
 						goto default;
                     case 99: //Termination Selection
                         this.loopIsRunning = false; // to terminate the do while after choice is to terminate the program

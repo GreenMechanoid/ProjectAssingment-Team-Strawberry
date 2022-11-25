@@ -9,18 +9,18 @@ namespace ProjectAssingment_Team_Strawberry
     class Loans : BankAccounts
     {
         double interestRate = 0.1;
-        public double ammountLoaned;
+        public double amountLoaned;
         public string creditCheck;
         public float maxAllowedLoan;
 
-        // Method to see Interest Ammount.
-        public double customerInterestAmmount(double ammount)
+        // Method to see Interest Amount.
+        public double customerInterestAmount(double amount)
         {
-            return ammount * interestRate;
+            return amount * interestRate;
         }
 
-        // Method to check if currentuser can get the loan ammount asked for.
-        public bool issueLoan(Userhandling currentUser, double ammount)
+        // Method to check if currentuser can get the loan amount asked for.
+        public bool issueLoan(Userhandling currentUser, double amount)
         {
             double allowedToLoan = 0;
             foreach (var account in currentUser.MyAccounts)
@@ -35,7 +35,7 @@ namespace ProjectAssingment_Team_Strawberry
                 }
                 
             }
-            return ammount < allowedToLoan * 5;
+            return amount < allowedToLoan * 5;
         }
 
         // Menu options to handle user choices.
@@ -45,7 +45,7 @@ namespace ProjectAssingment_Team_Strawberry
             bool isAChoice = false;
             bool doneyet = false;
             int switcheroo = 0;
-            string userAmmount;
+            string userAmount;
             do
             {
 
@@ -55,23 +55,23 @@ namespace ProjectAssingment_Team_Strawberry
                     case 1:
                         Console.Clear();
                         Console.WriteLine("Make a choice and see interestrate.");
-                        userAmmount = Console.ReadLine();
-                        var ammount = customerInterestAmmount(Convert.ToDouble(userAmmount));
-                        Console.WriteLine($"You will have to pay an interestammount : {ammount}");
+                        userAmount = Console.ReadLine();
+                        var amount = customerInterestAmount(Convert.ToDouble(userAmount));
+                        Console.WriteLine($"You will have to pay an interestamount : {amount}");
                         Thread.Sleep(4000);
                         goto default;
                     case 2:
                         Console.Clear();
                         Console.WriteLine("How much do you want to loan?");
-                        userAmmount = Console.ReadLine();
-                        bool allowed = issueLoan(user, Convert.ToDouble(userAmmount));
+                        userAmount = Console.ReadLine();
+                        bool allowed = issueLoan(user, Convert.ToDouble(userAmount));
                         if (allowed)
                         {
-                            Console.WriteLine("You are allowed to loan that ammount.");
+                            Console.WriteLine("You are allowed to loan that amount.");
                         }
                         else
                         {
-                            Console.WriteLine("You are not allowed to loan that ammount.");
+                            Console.WriteLine("You are not allowed to loan that amount.");
                         }
                         Thread.Sleep(4000);
                         goto default;
@@ -81,7 +81,7 @@ namespace ProjectAssingment_Team_Strawberry
                     default:
                         Console.Clear();
                         //login to system
-                        Console.WriteLine("1: Interestrate ammount.");
+                        Console.WriteLine("1: Interestrate amount.");
                         Console.WriteLine("2: Get a loan.");
                         Console.WriteLine("3: Go back to menu.");
 
