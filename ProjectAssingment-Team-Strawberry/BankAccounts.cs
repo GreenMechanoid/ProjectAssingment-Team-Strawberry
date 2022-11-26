@@ -231,10 +231,119 @@ namespace ProjectAssingment_Team_Strawberry
 
 
         }
-        public void currencyConverter(string currency, string currency2, double exchangeRate)
+        public void currencyConverter()
         {
 
+            double exchangeRate;
+            string currency;
+            string currency2;
+            bool loop = true;
+
+            do
+            {
+                Console.WriteLine("You can convert between SEK, EUR, USD");
+
+                Console.WriteLine("Enter the currency you want to convert from: ");
+                currency = Console.ReadLine().ToUpper();
+
+                Console.WriteLine("Enter the currency you want to convert to: ");
+                currency2 = Console.ReadLine().ToUpper();
+
+                if (currency == "SEK" && currency2 == "EUR")
+                {
+                    loop = false;
+                }
+                else if (currency == "EUR" && currency2 == "SEK") 
+                {
+                    loop = false;
+                }
+                else if (currency == "SEK" && currency2 == "USD")
+                {
+                    loop = false;
+                }
+                else if (currency == "USD" && currency2 == "SEK")
+                {
+                    loop = false;
+                }
+                else if (currency == "EUR" && currency2 == "USD")
+                {
+                    loop = false;
+                }
+                else if (currency == "USD" && currency2 == "EUR")
+                {
+                    loop = false;
+                }
+                else if (currency == currency2)
+                {
+                    Console.WriteLine("You can't convert a currency to itself");
+                    loop = true;
+                }
+            } while (loop);
+            
+            double amount, amount2;
+
+            if (currency == "SEK" && currency2 == "EUR")
+            {
+                exchangeRate = 0.092;
+
+                Console.WriteLine("Enter the amount you would like to convert: ");
+                amount = double.Parse(Console.ReadLine());
+                amount2 = amount * exchangeRate;
+
+                Console.WriteLine(amount + " " + currency + " is " + amount2 + " " + currency2);
+            }
+            else if (currency == "EUR" && currency2 == "SEK")
+            {
+                exchangeRate = 10.9;
+
+                Console.WriteLine("Enter the amount you would like to convert: ");
+                amount = double.Parse(Console.ReadLine());
+                amount2 = amount * exchangeRate;
+
+                Console.WriteLine(amount + " " + currency + " is " + amount2 + " " + currency2);
+            }
+            else if (currency == "SEK" && currency2 == "USD")
+            {
+                exchangeRate = 0.094;
+
+                Console.WriteLine("Enter the amount you would like to convert: ");
+                amount = double.Parse(Console.ReadLine());
+                amount2 = amount * exchangeRate;
+
+                Console.WriteLine(amount + " " + currency + " is " + amount2 + " " + currency2);
+            }
+            else if (currency == "USD" && currency2 == "SEK")
+            {
+                exchangeRate = 10.58;
+
+                Console.WriteLine("Enter the amount you would like to convert: ");
+                amount = double.Parse(Console.ReadLine());
+                amount2 = amount * exchangeRate;
+
+                Console.WriteLine(amount + " " + currency + " is " + amount2 + " " + currency2);
+            }
+            else if (currency == "EUR" && currency2 == "USD")
+            {
+                exchangeRate = 1.041;
+
+                Console.WriteLine("Enter the amount you would like to convert: ");
+                amount = double.Parse(Console.ReadLine());
+                amount2 = amount * exchangeRate;
+
+                Console.WriteLine(amount + " " + currency + " is " + amount2 + " " + currency2);
+            }
+            else if (currency == "USD" && currency2 == "EUR")
+            {
+                exchangeRate = 0.96;
+
+                Console.WriteLine("Enter the amount you would like to convert: ");
+                amount = double.Parse(Console.ReadLine());
+                amount2 = amount * exchangeRate;
+
+                Console.WriteLine(amount + " " + currency + " is " + amount2 + " " + currency2);
+            }
         }
+
         public void ShowlogTransaction(List<BankAccounts> accounts)
         {
 
