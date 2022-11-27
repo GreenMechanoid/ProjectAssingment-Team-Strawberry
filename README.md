@@ -104,7 +104,7 @@ Methods:
   -Transfer money between you own accounts, IE from salary account to savings.
   
   public void currencyConverter(string currency, string currency2, double exchangeRate)
-  - meant to convert currency at a fixed rate for the day - not implemented
+  - meant to convert currency at a fixed rate for the day set by admin
   
   public void ShowlogTransaction(List<BankAccounts> accounts)
   -meant to show the transaction logs on selected account - not implemented
